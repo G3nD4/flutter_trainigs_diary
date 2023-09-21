@@ -16,7 +16,7 @@ class _SportAppState extends State<SportApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Training diary',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.orange,
