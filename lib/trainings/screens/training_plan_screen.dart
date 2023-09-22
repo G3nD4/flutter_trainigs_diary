@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sport_app/common_widgets/common_appbar.dart';
+import 'package:sport_app/trainings/screens/edit_training_screen.dart';
 import 'package:sport_app/utils/models/training_plan_model.dart';
 
 class TrainingPlanScreen extends StatelessWidget {
@@ -23,28 +24,29 @@ class TrainingPlanScreen extends StatelessWidget {
             Text(
               training.title,
               style: const TextStyle(
-                fontSize: 22.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            const Divider(
-              thickness: 1.0,
-            ),
+            const SizedBox(height: 8.0),
             Text(
               training.description ?? 'Description not provided',
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontSize: 18.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.w400,
                 color: Color.fromRGBO(100, 100, 100, 1),
               ),
             ),
-            const SizedBox(height: 8.0),
+            const Divider(
+              thickness: 1.0,
+            ),
+            const SizedBox(height: 16.0),
             const Text(
               'Exercises',
               style: TextStyle(
-                fontSize: 22.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -52,14 +54,24 @@ class TrainingPlanScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: Container(
-        decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.orange,),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.orange,
+        ),
         child: IconButton(
           icon: const Icon(
             Icons.edit,
             color: Colors.white,
             size: 40.0,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditTrainingScreen(training: training,),
+              ),
+            );
+          },
         ),
       ),
     );

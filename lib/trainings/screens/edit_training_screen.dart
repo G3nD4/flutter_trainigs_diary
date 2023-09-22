@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sport_app/common_widgets/common_appbar.dart';
+import 'package:sport_app/trainings/widgets/exercise_edit_dialog.dart';
 import 'package:sport_app/utils/models/exercise_model.dart';
 import 'package:sport_app/utils/models/training_plan_model.dart';
 
 class EditTrainingScreen extends StatefulWidget {
-  const EditTrainingScreen({super.key});
+  final TrainingPlan? training;
+
+  const EditTrainingScreen({super.key, this.training});
 
   @override
   State<EditTrainingScreen> createState() => _EditTrainingScreenState();
@@ -20,8 +23,10 @@ class _EditTrainingScreenState extends State<EditTrainingScreen> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController();
-    _descriptionController = TextEditingController();
+    _titleController = TextEditingController(text: widget.training?.title);
+    _descriptionController =
+        TextEditingController(text: widget.training?.description);
+    _exercises.addAll(widget.training?.exercises ?? []);
   }
 
   @override
@@ -42,6 +47,7 @@ class _EditTrainingScreenState extends State<EditTrainingScreen> {
                 _title = value;
               },
             ),
+            const SizedBox(height: 16.0),
             TextFormField(
               decoration: const InputDecoration(
                   hintText: 'This training will help me to...'),
@@ -50,17 +56,47 @@ class _EditTrainingScreenState extends State<EditTrainingScreen> {
                 _description = value;
               },
             ),
+            const SizedBox(height: 16.0),
+            MaterialButton(
+              onPressed: () async {
+                await showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const ExerciseEditDialog());
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add, color: Colors.orange),
+                  Text(
+                    'Add exercise',
+                    style: TextStyle(
+                      color: Colors.orange,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             MaterialButton(
               onPressed: () {
                 if (context.mounted) {
-                  Navigator.pop(context, TrainingPlan(
-                    title: _title,
-                    description: _description,
-                    exercises: _exercises,
-                  ),);
+                  Navigator.pop(
+                    context,
+                    TrainingPlan(
+                      title: _title,
+                      description: _description,
+                      exercises: _exercises,
+                    ),
+                  );
                 }
               },
-              child: const Text('Save'),
+              child: const Text(
+                'Save',
+                style: TextStyle(
+                  color: Colors.orange,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             )
           ],
         ),

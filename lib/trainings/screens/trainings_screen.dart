@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sport_app/trainings/bloc/trainings_bloc.dart';
 import 'package:sport_app/trainings/widgets/no_trainings.dart';
-import 'package:sport_app/trainings/widgets/title.dart';
 import 'package:sport_app/trainings/widgets/training_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

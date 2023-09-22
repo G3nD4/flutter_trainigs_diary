@@ -9,5 +9,3 @@ class AddTrainingEvent extends TrainingsEvent {
 
   AddTrainingEvent(this.training);
 }
-
-class EditTrainingEvent extends TrainingsEvent {}
