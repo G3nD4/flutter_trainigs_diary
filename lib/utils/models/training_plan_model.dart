@@ -13,8 +13,8 @@ class TrainingPlan {
       description: json['description'],
       exercises: json['exercises'] == null
           ? null
-          : (json['exercises'] as List<Map<String, dynamic>>)
-              .map((exercise) => Exercise.fromJson(exercise))
+          : (json['exercises'] as List<dynamic>)
+              .map((exercise) => Exercise.fromJson(exercise as Map<String, dynamic>))
               .toList(),
     );
   }

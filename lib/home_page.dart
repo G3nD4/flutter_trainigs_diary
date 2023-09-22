@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  static const List<String> _titles = ['Stopwatch', 'Trainings diary'];
+  static const List<String> _titles = ['Stopwatch', 'My trainings'];
 
   @override
   Widget build(BuildContext context) {

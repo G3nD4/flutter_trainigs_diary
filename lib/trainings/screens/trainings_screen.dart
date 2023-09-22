@@ -1,47 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/trainings/screens/add_training_screen.dart';
+import 'package:sport_app/trainings/bloc/trainings_bloc.dart';
 import 'package:sport_app/trainings/widgets/no_trainings.dart';
 import 'package:sport_app/trainings/widgets/title.dart';
 import 'package:sport_app/trainings/widgets/training_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../utils/models/training_plan_model.dart';
-import '../../utils/services/preferences_service.dart';
+import 'edit_training_screen.dart';
 
-class TrainingsScreen extends StatelessWidget {
+class TrainingsScreen extends StatefulWidget {
   const TrainingsScreen({super.key});
+
+  @override
+  State<TrainingsScreen> createState() => _TrainingsScreenState();
+}
+
+class _TrainingsScreenState extends State<TrainingsScreen> {
+  late final TrainingsBloc trainingsBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    trainingsBloc = TrainingsBloc()..add(TrainingsLoadEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const TrainingPlanTitle(),
-          FutureBuilder(
-            future: getTrainings(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.done:
-                  if (!snapshot.hasData) {
-                    return const Center(child: NoTrainingsText());
-                  }
-                  List<TrainingPlan> trainings = snapshot.data ?? [];
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return TrainingContainerWidget(
-                          training: trainings[index],
-                        );
-                      },
-                    ),
-                  );
-                default:
-                  return const Center(child: CircularProgressIndicator());
+      body: BlocProvider(
+        create: (context) => trainingsBloc,
+        child: BlocBuilder<TrainingsBloc, TrainingsState>(
+          builder: (context, state) {
+            if (state is TrainingsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is TrainingsLoaded) {
+              if (state.trainings.isEmpty) {
+                return const Center(child: NoTrainingsText());
               }
-            },
-          )
-        ],
+              return CustomScrollView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => TrainingContainerWidget(
+                        training: state.trainings[index],
+                      ),
+                      childCount: state.trainings.length,
+                    ),
+                  )
+                ],
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
       floatingActionButton: IconButton(
         iconSize: 64.0,
@@ -53,8 +66,14 @@ class TrainingsScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AddTrainingDart(),
+              builder: (context) => const EditTrainingScreen(),
             ),
+          ).then(
+            (value) async {
+              if (value != null) {
+                trainingsBloc.add(AddTrainingEvent(value));
+              }
+            },
           );
         },
       ),
