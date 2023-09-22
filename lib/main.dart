@@ -36,6 +36,7 @@ class _SportAppState extends State<SportApp> {
           ),
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
+            primary: Colors.white
           ),
           useMaterial3: true,
         ),
