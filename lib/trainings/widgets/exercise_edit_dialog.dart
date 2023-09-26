@@ -22,6 +22,7 @@ class _ExerciseEditDialogState extends State<ExerciseEditDialog> {
     // TODO: add initialization (of what?)
     _titleController = TextEditingController(text: widget.exercise?.title ?? '');
     _descriptionController = TextEditingController(text: widget.exercise?.description ?? '');
+    if (widget.exercise != null) isDataValid = true;
   }
 
   @override
