@@ -53,15 +53,15 @@ class StopwatchControls extends StatelessWidget {
     required bool isResetAvailable,
     required bool isAddingResultAvailable,
   }) {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildActionButton(
-          iconData: Icons.add,
-          onPressed: () {},  // TODO: implement saveResult,
-          isAvailable: isResetAvailable,
-        ),
-        const SizedBox(width: 32.0),
+        // _buildActionButton(
+        //   iconData: Icons.add,
+        //   onPressed: () {},  // TODO: implement saveResult,
+        //   isAvailable: isResetAvailable,
+        // ),
+        const SizedBox(height: 32.0),
         isStartAvailable
             ? _buildActionButton(
                 iconData: Icons.play_arrow_rounded,
@@ -73,7 +73,7 @@ class StopwatchControls extends StatelessWidget {
                 onPressed: stop,
                 isAvailable: !isStartAvailable,
                 size: 70.0),
-        const SizedBox(width: 32.0),
+        const SizedBox(height: 32.0),
         _buildActionButton(
           iconData: Icons.restart_alt_outlined,
           onPressed: reset,

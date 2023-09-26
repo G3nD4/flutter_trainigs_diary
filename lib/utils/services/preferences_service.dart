@@ -36,3 +36,20 @@ Future<List<TrainingPlan>?> getTrainings() async {
       .map((trainingPlan) => TrainingPlan.fromJson(jsonDecode(trainingPlan)))
       .toList();
 }
+
+Future<List<TrainingPlan>?> getDatedTrainings() async {
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
+  List<String>? trainings = preferences.getStringList('dated_trainings');
+  if (trainings == null) return null;
+  return trainings
+      .map((trainingPlan) => TrainingPlan.fromJson(jsonDecode(trainingPlan)))
+      .toList();
+}
+
+Future<void> addDatedTraining(List<TrainingPlan> trainings) async {
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setStringList(
+    'dated_trainings',
+    trainings.map((trainingPlan) => jsonEncode(trainingPlan.toJson())).toList(),
+  );
+}

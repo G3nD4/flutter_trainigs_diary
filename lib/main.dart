@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sport_app/home_page.dart';
 import 'package:sport_app/trainings/bloc/trainings_bloc.dart';
+import 'package:sport_app/trainings/cubit/dated_trainings_cubit.dart';
 
 void main() {
   runApp(const SportApp());
 }
 
-class SportApp extends StatefulWidget {
+class SportApp extends StatelessWidget {
   const SportApp({super.key});
 
-  @override
-  State<SportApp> createState() => _SportAppState();
-}
-
-class _SportAppState extends State<SportApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -22,6 +18,9 @@ class _SportAppState extends State<SportApp> {
         BlocProvider<TrainingsBloc>(
           create: (context) => TrainingsBloc(),
         ),
+        BlocProvider(
+          create: (context) => DatedTrainingsCubit(),
+        )
       ],
       child: MaterialApp(
         title: 'Training diary',
@@ -36,7 +35,7 @@ class _SportAppState extends State<SportApp> {
           ),
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
-            primary: Colors.white
+            // primary: Colors.white
           ),
           useMaterial3: true,
         ),

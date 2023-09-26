@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sport_app/utils/models/exercise_model.dart';
 
 class ExerciseEditDialog extends StatefulWidget {
-  const ExerciseEditDialog({super.key});
+  final Exercise? exercise;
+
+  const ExerciseEditDialog({super.key, this.exercise});
 
   @override
   State<ExerciseEditDialog> createState() => _ExerciseEditDialogState();
@@ -11,12 +13,14 @@ class ExerciseEditDialog extends StatefulWidget {
 class _ExerciseEditDialogState extends State<ExerciseEditDialog> {
   late final TextEditingController _titleController;
   late final TextEditingController _descriptionController;
+  bool isDataValid = false;
 
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController();
-    _descriptionController = TextEditingController();
+    // TODO: add initialization (of what?)
+    _titleController = TextEditingController(text: widget.exercise?.title ?? '');
+    _descriptionController = TextEditingController(text: widget.exercise?.description ?? '');
   }
 
   @override
@@ -29,6 +33,11 @@ class _ExerciseEditDialogState extends State<ExerciseEditDialog> {
           TextFormField(
             decoration: const InputDecoration(hintText: 'Title...'),
             controller: _titleController,
+            onChanged: (value) {
+              setState(() {
+                isDataValid = value != '';
+              });
+            },
           ),
           const SizedBox(height: 8.0),
           TextFormField(
@@ -38,23 +47,25 @@ class _ExerciseEditDialogState extends State<ExerciseEditDialog> {
           ),
           const SizedBox(height: 8.0),
           MaterialButton(
-            onPressed: () {
-              if (context.mounted) {
-                Navigator.pop(
-                  context,
-                  Exercise(
-                    title: _titleController.text,
-                    description: _descriptionController.text,
-                  ),
-                );
-              }
-            },
-            child: const Text(
+            onPressed: isDataValid ? _addExercise : null,
+            child: Text(
               'Save',
-              style: TextStyle(color: Colors.orange),
+              style: TextStyle(
+                color: isDataValid ? Colors.orange : Colors.grey,
+              ),
             ),
           )
         ],
+      ),
+    );
+  }
+
+  void _addExercise() {
+    Navigator.pop(
+      context,
+      Exercise(
+        title: _titleController.text,
+        description: _descriptionController.text,
       ),
     );
   }

@@ -11,6 +11,7 @@ class TrainingsBloc extends Bloc<TrainingsEvent, TrainingsState> {
   TrainingsBloc() : super(TrainingsInitial()) {
     on<TrainingsLoadEvent>(_loadTrainings);
     on<AddTrainingEvent>(_addTraining);
+    on<UpdateTrainingEvent>(_updateTraining);
   }
 
   void _loadTrainings(TrainingsLoadEvent event, Emitter<TrainingsState> emit) async {
@@ -22,6 +23,13 @@ class TrainingsBloc extends Bloc<TrainingsEvent, TrainingsState> {
   void _addTraining(AddTrainingEvent event, Emitter<TrainingsState> emit) async {
     emit(TrainingsLoading());
     trainings.add(event.training);
+    await updateTrainings(trainings);
+    emit(TrainingsLoaded(trainings));
+  }
+
+  void _updateTraining(UpdateTrainingEvent event, Emitter<TrainingsState> emit) async {
+    emit(TrainingsLoading());
+    trainings[event.index] = event.training;
     await updateTrainings(trainings);
     emit(TrainingsLoaded(trainings));
   }

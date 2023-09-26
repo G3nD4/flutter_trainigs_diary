@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sport_app/trainings/bloc/trainings_bloc.dart';
 import 'package:sport_app/trainings/screens/training_plan_screen.dart';
 import 'package:sport_app/utils/models/training_plan_model.dart';
 
 class TrainingContainerWidget extends StatelessWidget {
   final TrainingPlan training;
+  final int index;
+  final TrainingsBloc trainingsBloc;
 
-  const TrainingContainerWidget({super.key, required this.training});
+  const TrainingContainerWidget({super.key, required this.training, required this.index, required this.trainingsBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class TrainingContainerWidget extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => TrainingPlanScreen(training: training),
+              builder: (context) => TrainingPlanScreen(training: training, trainingsBloc: trainingsBloc, index: index),
             ),
           );
         },

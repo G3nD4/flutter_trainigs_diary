@@ -9,3 +9,10 @@ class AddTrainingEvent extends TrainingsEvent {
 
   AddTrainingEvent(this.training);
 }
+
+class UpdateTrainingEvent extends TrainingsEvent {
+  final TrainingPlan training;
+  final int index;
+
+  UpdateTrainingEvent(this.index, this.training);
+}
