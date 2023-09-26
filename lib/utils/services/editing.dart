@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/utils/models/exercise_model.dart';
 
 import '../../trainings/widgets/exercise_edit_dialog.dart';
+import '../models/exercise_model.dart';
 
 Future<Exercise> editExercise(BuildContext context, Exercise exercise) async {
   return await showModalBottomSheet(

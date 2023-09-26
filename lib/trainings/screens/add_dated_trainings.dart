@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/common_widgets/common_appbar.dart';
-import 'package:sport_app/utils/models/training_plan_model.dart';
-import 'package:sport_app/utils/services/preferences_service.dart';
+
+import '../../common_widgets/common_appbar.dart';
+import '../../utils/models/training_plan_model.dart';
+import '../../utils/services/preferences_service.dart';
 
 class AddDatedTrainings extends StatelessWidget {
   const AddDatedTrainings({super.key});

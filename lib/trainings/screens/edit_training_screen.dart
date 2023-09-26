@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/common_widgets/common_appbar.dart';
-import 'package:sport_app/trainings/widgets/exercise_edit_dialog.dart';
-import 'package:sport_app/trainings/widgets/exercise_widget.dart';
-import 'package:sport_app/utils/models/exercise_model.dart';
-import 'package:sport_app/utils/models/training_plan_model.dart';
-import 'package:sport_app/utils/services/editing.dart';
+
+import '../../common_widgets/common_appbar.dart';
+import '../../utils/models/exercise_model.dart';
+import '../../utils/models/training_plan_model.dart';
+import '../../utils/services/editing.dart';
+import '../widgets/exercise_widget.dart';
 
 class EditTrainingScreen extends StatefulWidget {
   final TrainingPlan? training;

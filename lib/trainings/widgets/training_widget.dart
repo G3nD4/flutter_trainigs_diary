@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/trainings/bloc/trainings_bloc.dart';
-import 'package:sport_app/trainings/screens/training_plan_screen.dart';
-import 'package:sport_app/utils/models/training_plan_model.dart';
+
+import '../../utils/models/training_plan_model.dart';
+import '../bloc/trainings_bloc.dart';
+import '../screens/training_plan_screen.dart';
 
 class TrainingContainerWidget extends StatelessWidget {
   final TrainingPlan training;

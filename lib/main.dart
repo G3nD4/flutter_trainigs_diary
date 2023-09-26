@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_app/home_page.dart';
-import 'package:sport_app/trainings/bloc/trainings_bloc.dart';
-import 'package:sport_app/trainings/cubit/dated_trainings_cubit.dart';
+import 'package:trainings_diary/trainings/bloc/trainings_bloc.dart';
+import 'package:trainings_diary/trainings/cubit/dated_trainings_cubit.dart';
+
+import 'home_page.dart';
 
 void main() {
   runApp(const SportApp());

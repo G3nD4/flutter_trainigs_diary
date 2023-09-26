@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sport_app/stopwatch_screen/widgets/stopwatch_time.dart';
-import 'package:sport_app/stopwatch_screen/widgets/stopwatch_controls.dart';
+import 'package:trainings_diary/stopwatch_screen/widgets/stopwatch_controls.dart';
+import 'package:trainings_diary/stopwatch_screen/widgets/stopwatch_time.dart';
 
 import 'logic/stopwatch_state.dart';
 

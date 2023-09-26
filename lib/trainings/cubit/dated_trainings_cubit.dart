@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:sport_app/utils/models/training_plan_model.dart';
-import 'package:sport_app/utils/services/preferences_service.dart';
+
+import '../../utils/models/training_plan_model.dart';
+import '../../utils/services/preferences_service.dart';
 
 part 'dated_trainings_state.dart';
 

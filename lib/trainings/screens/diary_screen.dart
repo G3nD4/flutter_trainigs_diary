@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_app/trainings/cubit/dated_trainings_cubit.dart';
-import 'package:sport_app/trainings/screens/training_plan_without_redaction.dart';
-import 'package:sport_app/utils/models/training_plan_model.dart';
+import 'package:trainings_diary/trainings/screens/training_plan_without_redaction.dart';
 
+import '../../utils/models/training_plan_model.dart';
+import '../cubit/dated_trainings_cubit.dart';
 import 'add_dated_trainings.dart';
 
 class DiaryScreen extends StatefulWidget {

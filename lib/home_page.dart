@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/stopwatch_screen/stopwatch_screen.dart';
-import 'package:sport_app/trainings/screens/trainings_screen.dart';
+import 'package:trainings_diary/stopwatch_screen/stopwatch_screen.dart';
+import 'package:trainings_diary/trainings/screens/trainings_screen.dart';
 
 import 'common_widgets/common_appbar.dart';
 

@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sport_app/utils/models/training_plan_model.dart';
+
+import '../models/training_plan_model.dart';
 
 /// Either replaces the existing training plan with given [trainingPlan], or creates new one.
 Future<void> updateTrainingPlan(TrainingPlan trainingPlan) async {

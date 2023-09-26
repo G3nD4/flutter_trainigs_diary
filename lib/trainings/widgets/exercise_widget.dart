@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/trainings/widgets/exercise_edit_dialog.dart';
-import 'package:sport_app/utils/models/exercise_model.dart';
+
+import '../../utils/models/exercise_model.dart';
+import 'exercise_edit_dialog.dart';
 
 class ExerciseWidget extends StatefulWidget {
   final Exercise exercise;

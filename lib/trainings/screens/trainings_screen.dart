@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sport_app/trainings/screens/diary_screen.dart';
-import 'package:sport_app/trainings/screens/trainings_list_screen.dart';
+import 'package:trainings_diary/trainings/screens/trainings_list_screen.dart';
+
+import 'diary_screen.dart';
 
 class TrainingsScreen extends StatelessWidget {
   const TrainingsScreen({super.key});
