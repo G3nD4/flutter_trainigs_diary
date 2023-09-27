@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trainings_diary/utils/services/editing.dart';
 
 import '../../utils/models/exercise_model.dart';
 import 'exercise_edit_dialog.dart';
@@ -6,9 +7,10 @@ import 'exercise_edit_dialog.dart';
 class ExerciseWidget extends StatefulWidget {
   final Exercise exercise;
   final void Function(Exercise exercise) updateExercise;
+  final void Function(Exercise exercise) deleteExercise;
 
   const ExerciseWidget(
-      {super.key, required this.exercise, required this.updateExercise});
+      {super.key, required this.exercise, required this.updateExercise, required this.deleteExercise});
 
   @override
   State<ExerciseWidget> createState() => _ExerciseWidgetState();
@@ -39,13 +41,31 @@ class _ExerciseWidgetState extends State<ExerciseWidget> {
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.exercise.title),
-                  if (widget.exercise.description != null)
-                    Text(widget.exercise.description!),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.exercise.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      if (widget.exercise.description != null)
+                        Text(widget.exercise.description!, maxLines: 2,
+                        overflow: TextOverflow.ellipsis,),
+                    ],
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () async {
+                      if (await showSubmissionDialog(context, text: 'Are you sure you want to delete this exercise?')) {
+                        widget.deleteExercise(widget.exercise);
+                      }
+                    }
+                  )
                 ],
               ),
             ),

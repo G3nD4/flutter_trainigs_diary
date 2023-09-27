@@ -80,7 +80,11 @@ class _EditTrainingScreenState extends State<EditTrainingScreen> {
                   setState(() {
                     _exercises[index] = newExercise;
                   });
-                });
+                }, deleteExercise: (Exercise newExercise) {
+                  setState(() {
+                    _exercises.removeAt(index);
+                  });
+                },);
               },
               itemCount: _exercises.length,
             ),
