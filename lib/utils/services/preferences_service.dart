@@ -38,6 +38,10 @@ Future<List<TrainingPlan>?> getTrainings() async {
       .toList();
 }
 
+Future<void> deleteTraining(TrainingPlan trainingPlan) async {
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
+}
+
 Future<List<TrainingPlan>?> getDatedTrainings() async {
   final SharedPreferences preferences = await SharedPreferences.getInstance();
   List<String>? trainings = preferences.getStringList('dated_trainings');
@@ -53,4 +57,8 @@ Future<void> addDatedTraining(List<TrainingPlan> trainings) async {
     'dated_trainings',
     trainings.map((trainingPlan) => jsonEncode(trainingPlan.toJson())).toList(),
   );
+}
+
+Future<void> deleteDatedTraining(TrainingPlan trainingPlan) async {
+  
 }

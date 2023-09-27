@@ -178,6 +178,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         continue;
       }
       currentIndex += 1;
+      result.add([]);
       result[currentIndex].add(trainings[i]);
     }
 
