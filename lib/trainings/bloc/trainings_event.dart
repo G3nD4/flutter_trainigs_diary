@@ -16,3 +16,9 @@ class UpdateTrainingEvent extends TrainingsEvent {
 
   UpdateTrainingEvent(this.index, this.training);
 }
+
+class DeleteTrainingEvent extends TrainingsEvent {
+  final int index;
+
+  DeleteTrainingEvent(this.index);
+}

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trainings_diary/trainings/screens/training_plan_without_redaction.dart';
 
 import '../../utils/models/training_plan_model.dart';
+import '../../utils/services/editing.dart';
 import '../cubit/dated_trainings_cubit.dart';
 import 'add_dated_trainings.dart';
 
@@ -106,44 +107,67 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      TrainingPlanWithounRedactionScreen(
-                                    training: training,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      training.title,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    if (training.description != null)
-                                      Text(
-                                        training.description!,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.0,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            TrainingPlanWithounRedactionScreen(
+                                          training: training,
                                         ),
                                       ),
-                                  ],
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            training.title,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16.0,
+                                            ),
+                                          ),
+                                          if (training.description != null)
+                                            Text(
+                                              training.description!,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              IconButton(
+                                onPressed: () async {
+                                  if (await showSubmissionDialog(
+                                    context,
+                                    text:
+                                        'Are you sure you want to delete this entry?',
+                                  )) {
+                                    datedTrainingsCubit
+                                        .deleteTraining(training);
+                                  }
+                                },
+                                icon: const Icon(Icons.delete),
+                              ),
+                            ],
                           ),
                         ),
                       ],

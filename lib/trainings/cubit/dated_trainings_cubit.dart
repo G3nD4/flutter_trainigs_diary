@@ -18,7 +18,13 @@ class DatedTrainingsCubit extends Cubit<DatedTrainingsState> {
 
   void updateTrainings(TrainingPlan newDatedTrainingPlan) async {
     trainings.add(newDatedTrainingPlan);
-    await addDatedTraining(trainings);
+    await updateDatedTraining(trainings);
+    emit(DatedTrainingsLoaded(trainings));
+  }
+
+  void deleteTraining(TrainingPlan training) async {
+    trainings.remove(training);
+    await updateDatedTraining(trainings);
     emit(DatedTrainingsLoaded(trainings));
   }
 }

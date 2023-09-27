@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trainings_diary/utils/models/training_plan_model.dart';
 
-import '../../common_widgets/common_appbar.dart';
 import '../../utils/models/exercise_model.dart';
+import '../../utils/services/editing.dart';
 import '../bloc/trainings_bloc.dart';
 import '../widgets/exercise_details_widget.dart';
 import 'edit_training_screen.dart';
@@ -22,9 +22,28 @@ class TrainingPlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(
-        title: 'Training plan',
-        needLeadingPopBack: true,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        title: const Text('Training plan'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () async {
+              if (await showSubmissionDialog(
+                context,
+                text: 'Are you sure you want to delete this training?',
+              )) {
+                trainingsBloc.add(DeleteTrainingEvent(index));
+                if (context.mounted) Navigator.pop(context);
+              }
+            },
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),

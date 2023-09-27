@@ -51,7 +51,7 @@ Future<List<TrainingPlan>?> getDatedTrainings() async {
       .toList();
 }
 
-Future<void> addDatedTraining(List<TrainingPlan> trainings) async {
+Future<void> updateDatedTraining(List<TrainingPlan> trainings) async {
   final SharedPreferences preferences = await SharedPreferences.getInstance();
   preferences.setStringList(
     'dated_trainings',

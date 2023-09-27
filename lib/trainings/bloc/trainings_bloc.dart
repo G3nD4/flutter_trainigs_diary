@@ -13,6 +13,7 @@ class TrainingsBloc extends Bloc<TrainingsEvent, TrainingsState> {
     on<TrainingsLoadEvent>(_loadTrainings);
     on<AddTrainingEvent>(_addTraining);
     on<UpdateTrainingEvent>(_updateTraining);
+    on<DeleteTrainingEvent>(_deleteTraining);
   }
 
   void _loadTrainings(TrainingsLoadEvent event, Emitter<TrainingsState> emit) async {
@@ -31,6 +32,13 @@ class TrainingsBloc extends Bloc<TrainingsEvent, TrainingsState> {
   void _updateTraining(UpdateTrainingEvent event, Emitter<TrainingsState> emit) async {
     emit(TrainingsLoading());
     trainings[event.index] = event.training;
+    await updateTrainings(trainings);
+    emit(TrainingsLoaded(trainings));
+  }
+
+  void _deleteTraining(DeleteTrainingEvent event, emit) async {
+    emit(TrainingsLoading());
+    trainings.removeAt(event.index);
     await updateTrainings(trainings);
     emit(TrainingsLoaded(trainings));
   }
